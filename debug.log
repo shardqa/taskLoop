@@ -1,0 +1,5 @@
+Looking in /home/richard_rosario/.config/browsh/config.toml for config.
+Attempting to connect to Firefox Marionette
+Starting Firefox in headless mode
+Using Firefox at: /usr/bin/firefox
+Using default profile at: /home/richard_rosario/.config/browsh/firefox_profile
