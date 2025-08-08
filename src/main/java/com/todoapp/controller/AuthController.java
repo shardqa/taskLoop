@@ -30,7 +30,7 @@ public class AuthController {
     @Operation(summary = "Registrar novo usuário", description = "Cria uma nova conta de usuário e retorna um token JWT")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         try {
-            User user = userService.registerUser(request.getEmail(), request.getPassword());
+            User user = userService.registerUser(request.getName(), request.getEmail(), request.getPassword());
             String token = jwtUtil.generateToken(user.getEmail());
             return ResponseEntity.ok(new AuthResponse(token, user.getEmail()));
         } catch (RuntimeException e) {

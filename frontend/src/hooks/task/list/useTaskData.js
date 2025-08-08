@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
-import { getTasks, deleteTask, restoreTask, toggleTaskCompletion } from '../services/taskService';
+import { getTasks, deleteTask, restoreTask, toggleTaskCompletion } from '../../../services/taskService';
 
 export const useTaskData = (setError) => {
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const loadTasks = useCallback(async (filters, pagination) => {
     setLoading(true);
@@ -20,10 +20,13 @@ export const useTaskData = (setError) => {
       };
       
       const response = await getTasks(params);
-      setTasks(response.content);
+      console.log('API Response:', response);
+      const tasksArray = Array.isArray(response) ? response : [];
+      console.log('Tasks array:', tasksArray);
+      setTasks(tasksArray);
       return {
-        totalPages: response.totalPages,
-        totalElements: response.totalElements
+        totalPages: 1,
+        totalElements: tasksArray.length
       };
     } catch (err) {
       setError('Failed to load tasks');

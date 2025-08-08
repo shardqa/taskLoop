@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskItem from './TaskItem';
+import { TaskItem } from '../item';
 
 const TaskListContent = ({ 
   tasks, 

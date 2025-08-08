@@ -18,10 +18,10 @@ export const useTaskFormData = (task) => {
         description: task.description || '',
         category: task.category || '',
         recurrence: {
-          type: task.recurrence?.type || null,
-          interval: task.recurrence?.interval || 1,
-          dayOfWeek: task.recurrence?.dayOfWeek || null,
-          dayOfMonth: task.recurrence?.dayOfMonth || null
+          type: task.recurrenceType || null,
+          interval: task.recurrenceInterval || 1,
+          dayOfWeek: null,
+          dayOfMonth: null
         }
       });
     }

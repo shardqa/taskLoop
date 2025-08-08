@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskItemContent from './TaskItemContent';
 import TaskItemActions from './TaskItemActions';
-import { useTaskItemHandlers } from '../hooks/useTaskItemHandlers';
+import { useTaskItemHandlers } from '../../../hooks/task';
 
 const TaskItem = ({ task, onToggleComplete, onEdit, onDelete, onRestore }) => {
   const {
@@ -12,8 +12,10 @@ const TaskItem = ({ task, onToggleComplete, onEdit, onDelete, onRestore }) => {
     handleRestore
   } = useTaskItemHandlers(task, onToggleComplete, onDelete, onRestore);
 
+  const isRecurrent = !!task.isRecurrent;
+
   return (
-    <div className={`task-item ${task.recurrence ? 'task-recurrent' : 'task-normal'}`}>
+    <div className={`task-item ${isRecurrent ? 'task-recurrent' : 'task-normal'}`}>
       <TaskItemContent
         task={task}
         onToggleComplete={handleToggleComplete}

@@ -7,8 +7,11 @@ export const useTaskFormHandlers = (formData, validation, onSubmit) => {
     }
     
     const submitData = {
-      ...formData.formData,
-      recurrence: formData.formData.recurrence.type ? formData.formData.recurrence : null
+      description: formData.formData.description,
+      category: formData.formData.category,
+      isRecurrent: formData.formData.recurrence.type ? true : false,
+      recurrenceType: formData.formData.recurrence.type,
+      recurrenceInterval: formData.formData.recurrence.interval
     };
     
     onSubmit(submitData);

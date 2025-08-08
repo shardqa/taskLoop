@@ -17,6 +17,8 @@ public class Task {
     private String description;
     private boolean isRecurrent = false;
     private RecurrenceType recurrenceType = RecurrenceType.UNLIMITED;
+    private int recurrenceInterval = 1;
+    private int completionCount = 0;
     private TaskState state = new TaskState();
     private TaskMetadata metadata = new TaskMetadata();
 

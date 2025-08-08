@@ -17,6 +17,12 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Setup global interceptor to handle 401/403 and force logout
+    authService.setupInterceptors(() => {
+      setToken(null);
+      setUser(null);
+    });
+
     if (token) {
       authService.setToken(token);
       setUser({ email: localStorage.getItem('userEmail') });
@@ -44,9 +50,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (email, password) => {
+  const register = async (name, email, password) => {
     try {
-      const response = await authService.register(email, password);
+      const response = await authService.register(name, email, password);
       const { token: newToken, email: userEmail } = response.data;
       
       setToken(newToken);

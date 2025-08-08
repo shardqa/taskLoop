@@ -2,8 +2,8 @@ import React from 'react';
 import TaskListHeader from './TaskListHeader';
 import TaskListFilters from './TaskListFilters';
 import TaskListContent from './TaskListContent';
-import TaskForm from './TaskForm';
-import { useTaskList } from '../hooks/useTaskList';
+import { TaskForm } from '../form';
+import { useTaskList } from '../../../hooks/task';
 
 const TaskList = () => {
   const {

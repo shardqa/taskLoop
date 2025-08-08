@@ -22,9 +22,14 @@ public class TaskQueryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TaskResponse>> getUserTasks(Authentication authentication) {
+    public ResponseEntity<List<TaskResponse>> getUserTasks(
+            @RequestParam(value = "completed", required = false) Boolean completed,
+            @RequestParam(value = "deleted", required = false) Boolean deleted,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "recurrence", required = false) String recurrence,
+            Authentication authentication) {
         String userId = authentication.getName();
-        List<Task> tasks = taskService.getUserTasks(userId);
+        List<Task> tasks = taskService.getUserTasksFiltered(userId, completed, deleted, category, recurrence);
         List<TaskResponse> responses = tasks.stream()
                 .map(TaskResponse::new)
                 .collect(Collectors.toList());

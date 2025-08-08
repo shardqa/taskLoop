@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskQueryService {
@@ -21,7 +22,40 @@ public class TaskQueryService {
     }
 
     public List<Task> getUserTasks(String userId) {
-        return taskRepository.findByUserIdOrderByMetadataPosition(userId);
+        return taskRepository.findByUserIdAndNotDeleted(userId);
+    }
+
+    public List<Task> getUserTasksFiltered(String userId, Boolean completed, Boolean deleted, String category, String recurrence) {
+        // Base set: deleted true => only deleted; otherwise not deleted
+        List<Task> baseTasks = Boolean.TRUE.equals(deleted)
+                ? taskRepository.findDeletedByUserId(userId)
+                : taskRepository.findByUserIdAndNotDeleted(userId);
+
+        return baseTasks.stream()
+                // completed filter: if provided, match exactly; if null, do not filter by completion
+                .filter(task -> completed == null || task.getState().isCompleted() == completed)
+                // category filter: if provided and non-empty, match exactly (case-sensitive as stored)
+                .filter(task -> category == null || category.isEmpty() || (task.getMetadata() != null && category.equals(task.getMetadata().getCategory())))
+                // recurrence filter: "recurrent" or "non-recurrent"
+                .filter(task -> {
+                    if (recurrence == null || recurrence.isEmpty()) {
+                        return true;
+                    }
+                    if ("recurrent".equalsIgnoreCase(recurrence)) {
+                        return task.isRecurrent();
+                    }
+                    if ("non-recurrent".equalsIgnoreCase(recurrence)) {
+                        return !task.isRecurrent();
+                    }
+                    return true;
+                })
+                // order by metadata.position if present
+                .sorted((a, b) -> {
+                    int posA = a.getMetadata() != null ? a.getMetadata().getPosition() : 0;
+                    int posB = b.getMetadata() != null ? b.getMetadata().getPosition() : 0;
+                    return Integer.compare(posA, posB);
+                })
+                .collect(Collectors.toList());
     }
 
     public Optional<Task> getTask(String taskId, String userId) {

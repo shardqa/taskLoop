@@ -9,6 +9,8 @@ public class TaskRequest {
     
     private boolean isRecurrent;
     private String category;
+    private String recurrenceType;
+    private int recurrenceInterval = 1;
 
     public TaskRequest() {}
 
@@ -40,5 +42,21 @@ public class TaskRequest {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getRecurrenceType() {
+        return recurrenceType;
+    }
+
+    public void setRecurrenceType(String recurrenceType) {
+        this.recurrenceType = recurrenceType;
+    }
+
+    public int getRecurrenceInterval() {
+        return recurrenceInterval;
+    }
+
+    public void setRecurrenceInterval(int recurrenceInterval) {
+        this.recurrenceInterval = recurrenceInterval;
     }
 } 

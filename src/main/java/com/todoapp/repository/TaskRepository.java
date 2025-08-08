@@ -16,6 +16,9 @@ public interface TaskRepository extends MongoRepository<Task, String> {
     @Query("{'userId': ?0, 'state.completed': false, 'state.deleted': false}")
     List<Task> findByUserIdOrderByMetadataPosition(String userId);
 
+    @Query("{'userId': ?0, 'state.deleted': false}")
+    List<Task> findByUserIdAndNotDeleted(String userId);
+
     @Query("{'userId': ?0, 'state.completed': false, 'state.deleted': false}")
     Page<Task> findByUserIdOrderByMetadataPosition(String userId, Pageable pageable);
 

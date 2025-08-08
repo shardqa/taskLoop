@@ -34,6 +34,21 @@ public class TaskActionService {
         return task;
     }
 
+    public Task toggleTaskCompletion(String taskId, String userId) {
+        Task task = taskRepository.findByIdAndUserId(taskId, userId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        boolean currentState = task.getState().isCompleted();
+        
+        if (!currentState && task.isRecurrent()) {
+            taskRecurrenceService.handleRecurrentTaskCompletion(task);
+            return task;
+        } else {
+            task.getState().setCompleted(!currentState);
+            return taskRepository.save(task);
+        }
+    }
+
     public void reorderTasks(String userId, List<String> taskIds) {
         taskOrderService.reorderTasks(userId, taskIds);
     }

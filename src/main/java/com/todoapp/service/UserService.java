@@ -18,13 +18,13 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(String email, String password) {
+    public User registerUser(String name, String email, String password) {
         if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("User with this email already exists");
         }
 
         String encodedPassword = passwordEncoder.encode(password);
-        User user = new User(email, encodedPassword);
+        User user = new User(name, email, encodedPassword);
         return userRepository.save(user);
     }
 

@@ -12,6 +12,8 @@ public class User {
     @Id
     private String id;
 
+    private String name;
+
     @Indexed(unique = true)
     private String email;
 
@@ -22,8 +24,9 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
-    public User(String email, String password) {
+    public User(String name, String email, String password) {
         this();
+        this.name = name;
         this.email = email;
         this.password = password;
     }
@@ -34,6 +37,14 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

@@ -8,7 +8,7 @@ const getAuthHeaders = () => {
 };
 
 export const toggleTaskCompletion = async (taskId, completed) => {
-  const response = await axios.post(`${API_URL}/api/tasks/${taskId}/toggle-completion`, { 
+  const response = await axios.post(`${API_URL}/tasks/${taskId}/toggle-completion`, { 
     completed 
   }, { 
     headers: getAuthHeaders() 
@@ -17,7 +17,7 @@ export const toggleTaskCompletion = async (taskId, completed) => {
 };
 
 export const reorderTasks = async (taskIds) => {
-  const response = await axios.put(`${API_URL}/api/tasks/reorder`, taskIds, { 
+  const response = await axios.put(`${API_URL}/tasks/reorder`, taskIds, { 
     headers: getAuthHeaders() 
   });
   return response.data;

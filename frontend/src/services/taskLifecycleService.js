@@ -13,13 +13,13 @@ export const getDeletedTasks = async (params = {}) => {
   if (params.page !== undefined) queryParams.append('page', params.page);
   if (params.size !== undefined) queryParams.append('size', params.size);
   
-  const url = `${API_URL}/api/tasks/deleted${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+  const url = `${API_URL}/tasks/deleted${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
   const response = await axios.get(url, { headers: getAuthHeaders() });
   return response.data;
 };
 
 export const permanentlyDeleteTask = async (taskId) => {
-  const response = await axios.delete(`${API_URL}/api/tasks/${taskId}/permanent`, { 
+  const response = await axios.delete(`${API_URL}/tasks/${taskId}/permanent`, { 
     headers: getAuthHeaders() 
   });
   return response.data;

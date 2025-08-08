@@ -5,6 +5,8 @@ public class TaskBuilder {
     private String description;
     private boolean isRecurrent = false;
     private RecurrenceType recurrenceType = RecurrenceType.UNLIMITED;
+    private int recurrenceInterval = 1;
+    private int completionCount = 0;
     private int position = 0;
     private String category;
 
@@ -28,6 +30,16 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder recurrenceInterval(int recurrenceInterval) {
+        this.recurrenceInterval = recurrenceInterval;
+        return this;
+    }
+
+    public TaskBuilder completionCount(int completionCount) {
+        this.completionCount = completionCount;
+        return this;
+    }
+
     public TaskBuilder position(int position) {
         this.position = position;
         return this;
@@ -44,7 +56,8 @@ public class TaskBuilder {
         task.setDescription(description);
         task.setRecurrent(isRecurrent);
         task.setRecurrenceType(recurrenceType);
-        // position e category agora devem ser setados via TaskMetadata
+        task.setRecurrenceInterval(recurrenceInterval);
+        task.setCompletionCount(completionCount);
         if (task.getMetadata() != null) {
             task.getMetadata().setPosition(position);
             task.getMetadata().setCategory(category);

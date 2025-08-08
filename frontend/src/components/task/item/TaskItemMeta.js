@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { useTaskItemUtils } from '../hooks/useTaskItemUtils';
+import { useTaskItemUtils } from '../../../hooks/task';
 
 const TaskItemMeta = ({ task }) => {
   const { getRecurrenceText, getCategoryColor } = useTaskItemUtils();
@@ -16,9 +16,9 @@ const TaskItemMeta = ({ task }) => {
         </span>
       )}
       
-      {getRecurrenceText(task.recurrence) && (
+      {getRecurrenceText({ type: task.recurrenceType, interval: task.recurrenceInterval }) && (
         <span className="task-recurrence">
-          🔄 {getRecurrenceText(task.recurrence)}
+          🔄 {getRecurrenceText({ type: task.recurrenceType, interval: task.recurrenceInterval })}
         </span>
       )}
       
@@ -28,9 +28,9 @@ const TaskItemMeta = ({ task }) => {
         </span>
       )}
       
-      {task.state.completed && task.metadata.completedAt && (
+      {task.state.completed && task.state.completedAt && (
         <span className="task-completed-date">
-          Completed: {format(new Date(task.metadata.completedAt), 'MMM dd, yyyy')}
+          Completed: {format(new Date(task.state.completedAt), 'MMM dd, yyyy')}
         </span>
       )}
     </div>

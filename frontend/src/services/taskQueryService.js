@@ -13,7 +13,7 @@ export const getTasksByCategory = async (category, params = {}) => {
   if (params.page !== undefined) queryParams.append('page', params.page);
   if (params.size !== undefined) queryParams.append('size', params.size);
   
-  const url = `${API_URL}/api/tasks/category/${category}${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+  const url = `${API_URL}/tasks/category/${category}${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
   const response = await axios.get(url, { headers: getAuthHeaders() });
   return response.data;
 };
@@ -24,7 +24,7 @@ export const getRecurrentTasks = async (params = {}) => {
   if (params.page !== undefined) queryParams.append('page', params.page);
   if (params.size !== undefined) queryParams.append('size', params.size);
   
-  const url = `${API_URL}/api/tasks/recurrent${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+  const url = `${API_URL}/tasks/recurrent${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
   const response = await axios.get(url, { headers: getAuthHeaders() });
   return response.data;
 }; 

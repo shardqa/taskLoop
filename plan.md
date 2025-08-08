@@ -1,29 +1,36 @@
-# TaskLoop Project Documentation
+# TaskLoop Project Plan
 
-## Documentation Index
+## Overview
+This directory contains the comprehensive project plan and documentation for the TaskLoop application.
 
-### Core Documentation
-- [Project Overview](plan/overview.md) - Project overview and architecture
-- [Features](plan/features.md) - Key features implemented
-- [Project Structure](plan/structure.md) - Project structure and organization
-- [API Documentation](plan/api.md) - API endpoints documentation
+## Architecture Documentation
+- [architecture/](architecture/) - System architecture and design
+  - [overview.md](architecture/overview.md) - High-level architecture overview
+  - [structure.md](architecture/structure.md) - Project structure and organization
+  - [features.md](architecture/features.md) - Detailed functionality descriptions
+  - [architecture.md](architecture/architecture.md) - Backend and frontend modularization insights
 
-### Development Information
-- [Development Guidelines](plan/guidelines.md) - Development guidelines and preferences
-- [Current Status](plan/status.md) - Current status and next steps
-- [Dependencies](plan/dependencies.md) - Project dependencies
-- [Project Memory](plan/project-memory.md) - Key learnings and preferences from development
+## Development Documentation
+- [development/](development/) - Development guidelines and technical details
+  - [guidelines.md](development/guidelines.md) - Development guidelines and standards
+  - [api.md](development/api.md) - API endpoints and documentation
+  - [dependencies.md](development/dependencies.md) - Dependencies and requirements
 
-## Quick Start
-1. Read the [Project Overview](plan/overview.md) for architecture understanding
-2. Check [Features](plan/features.md) for implemented functionality
-3. Review [Development Guidelines](plan/guidelines.md) for coding standards
-4. See [Current Status](plan/status.md) for what's completed and next steps
+## Project Documentation
+- [project/](project/) - Project management and insights
+  - [status.md](project/status.md) - Current project status and progress
+  - [lessons-learned.md](project/lessons-learned.md) - Lessons learned and success factors
+  - [technical-decisions.md](project/technical-decisions.md) - Key technical decisions and patterns
+  - [preferences.md](project/preferences.md) - User preferences and development process
 
-## Project Summary
-TaskLoop is a comprehensive task management application with a Java Spring Boot backend and React frontend, featuring advanced task management capabilities including recurrence, categorization, and soft delete functionality.
+## Quick Navigation
+- **Architecture**: Start with [architecture/overview.md](architecture/overview.md)
+- **Development**: See [development/guidelines.md](development/guidelines.md)
+- **Status**: Check [project/status.md](project/status.md)
+- **API**: Reference [development/api.md](development/api.md)
 
-**Key Technologies:**
-- Backend: Spring Boot, MongoDB, JWT Authentication
-- Frontend: React 18, Modular CSS, Axios
-- Architecture: Modular services, RESTful API, Responsive UI
+## Organization
+- **File Size**: All files kept under 100 lines
+- **Subdirectories**: Organized by domain (architecture, development, project)
+- **Cross-references**: Files link to each other where relevant
+- **Maintenance**: Easy to update individual aspects without affecting others

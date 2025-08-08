@@ -31,16 +31,20 @@ public class TaskService {
         return taskQueryService.getUserTasks(userId);
     }
 
-    public Task createTask(String userId, String description, boolean isRecurrent, String category) {
-        return taskModificationService.createTask(userId, description, isRecurrent, category);
+    public List<Task> getUserTasksFiltered(String userId, Boolean completed, Boolean deleted, String category, String recurrence) {
+        return taskQueryService.getUserTasksFiltered(userId, completed, deleted, category, recurrence);
+    }
+
+    public Task createTask(String userId, String description, boolean isRecurrent, String category, String recurrenceType, int recurrenceInterval) {
+        return taskModificationService.createTask(userId, description, isRecurrent, category, recurrenceType, recurrenceInterval);
     }
 
     public Optional<Task> getTask(String taskId, String userId) {
         return taskQueryService.getTask(taskId, userId);
     }
 
-    public Task updateTask(String taskId, String userId, String description, boolean isRecurrent, String category) {
-        return taskModificationService.updateTask(taskId, userId, description, isRecurrent, category);
+    public Task updateTask(String taskId, String userId, String description, boolean isRecurrent, String category, String recurrenceType, int recurrenceInterval) {
+        return taskModificationService.updateTask(taskId, userId, description, isRecurrent, category, recurrenceType, recurrenceInterval);
     }
 
     public void deleteTask(String taskId, String userId) {
@@ -49,6 +53,10 @@ public class TaskService {
 
     public Task completeTask(String taskId, String userId) {
         return taskActionService.completeTask(taskId, userId);
+    }
+
+    public Task toggleTaskCompletion(String taskId, String userId) {
+        return taskActionService.toggleTaskCompletion(taskId, userId);
     }
 
     public void reorderTasks(String userId, List<String> taskIds) {

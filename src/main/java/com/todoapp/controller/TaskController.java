@@ -29,7 +29,7 @@ public class TaskController {
     @Operation(summary = "Criar tarefa", description = "Cria uma nova tarefa para o usuário autenticado")
     public ResponseEntity<TaskResponse> createTask(@Valid @RequestBody TaskRequest request, Authentication authentication) {
         String userId = authentication.getName();
-        Task task = taskService.createTask(userId, request.getDescription(), request.isRecurrent(), request.getCategory());
+        Task task = taskService.createTask(userId, request.getDescription(), request.isRecurrent(), request.getCategory(), request.getRecurrenceType(), request.getRecurrenceInterval());
         return ResponseEntity.ok(new TaskResponse(task));
     }
 
@@ -40,7 +40,7 @@ public class TaskController {
                                                   Authentication authentication) {
         try {
             String userId = authentication.getName();
-            Task task = taskService.updateTask(taskId, userId, request.getDescription(), request.isRecurrent(), request.getCategory());
+            Task task = taskService.updateTask(taskId, userId, request.getDescription(), request.isRecurrent(), request.getCategory(), request.getRecurrenceType(), request.getRecurrenceInterval());
             return ResponseEntity.ok(new TaskResponse(task));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

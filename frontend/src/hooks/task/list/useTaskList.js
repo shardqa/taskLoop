@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useTaskData } from './useTaskData';
-import { useTaskForm } from './useTaskForm';
+import { useTaskForm } from '../form';
 import { useTaskFilters } from './useTaskFilters';
 import { useTaskPagination } from './useTaskPagination';
 
@@ -12,16 +12,21 @@ export const useTaskList = () => {
   const taskFilters = useTaskFilters();
   const taskPagination = useTaskPagination();
   
+  const { loadTasks: loadTasksFromData, handleToggleComplete: toggleComplete, handleDeleteTask: deleteTask, handleRestoreTask: restoreTask } = taskData;
+  const { filters } = taskFilters;
+  const { pagination, updatePagination } = taskPagination;
+  
   const loadTasks = useCallback(async () => {
-    const result = await taskData.loadTasks(taskFilters.filters, taskPagination.pagination);
+    const result = await loadTasksFromData(filters, pagination);
     if (result) {
-      taskPagination.updatePagination(result.totalPages, result.totalElements);
+      updatePagination(result.totalPages, result.totalElements);
     }
-  }, [taskData, taskFilters.filters, taskPagination]);
+  }, [loadTasksFromData, filters, pagination, updatePagination]);
 
   useEffect(() => {
+    console.log('useTaskList: Carregando tarefas...');
     loadTasks();
-  }, [loadTasks]);
+  }, []);
 
   const handleCreateTask = async (taskData) => {
     const success = await taskForm.handleCreateTask(taskData);
@@ -38,21 +43,21 @@ export const useTaskList = () => {
   };
 
   const handleToggleComplete = async (taskId, completed) => {
-    const success = await taskData.handleToggleComplete(taskId, completed);
+    const success = await toggleComplete(taskId, completed);
     if (success) {
       loadTasks();
     }
   };
 
   const handleDeleteTask = async (taskId) => {
-    const success = await taskData.handleDeleteTask(taskId);
+    const success = await deleteTask(taskId);
     if (success) {
       loadTasks();
     }
   };
 
   const handleRestoreTask = async (taskId) => {
-    const success = await taskData.handleRestoreTask(taskId);
+    const success = await restoreTask(taskId);
     if (success) {
       loadTasks();
     }

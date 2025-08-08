@@ -1,20 +1,9 @@
 import React from 'react';
 
 const TaskListFilters = ({ filters, onFilterChange, tasks }) => {
-  const getFilteredTasksCount = () => {
-    if (filters.showDeleted) {
-      return tasks.filter(task => task.state.deleted).length;
-    }
-    return tasks.filter(task => !task.state.deleted).length;
-  };
-
-  const getCompletedTasksCount = () => {
-    return tasks.filter(task => task.state.completed && !task.state.deleted).length;
-  };
-
-  const getPendingTasksCount = () => {
-    return tasks.filter(task => !task.state.completed && !task.state.deleted).length;
-  };
+  const getFilteredTasksCount = () => tasks.length;
+  const getCompletedTasksCount = () => tasks.filter(task => task.state.completed).length;
+  const getPendingTasksCount = () => tasks.filter(task => !task.state.completed).length;
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskFormModal from './TaskFormModal';
 import TaskFormFields from './TaskFormFields';
-import { useTaskFormState } from '../hooks/useTaskFormState';
+import { useTaskFormState } from '../../../hooks/task';
 
 const TaskForm = ({ task, onSubmit, onCancel, isSubmitting }) => {
   const {

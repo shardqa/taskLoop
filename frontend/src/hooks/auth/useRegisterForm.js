@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 export const useRegisterForm = (navigate) => {
   const [formData, setFormData] = useState({

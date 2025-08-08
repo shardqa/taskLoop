@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import TaskList from './components/TaskList';
-import PrivateRoute from './components/PrivateRoute';
+import { TaskList } from './components/task';
+import PrivateRoute from './components/common/PrivateRoute';
 import './App.css';
 
 function App() {

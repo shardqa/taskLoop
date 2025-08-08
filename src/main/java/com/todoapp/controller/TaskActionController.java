@@ -31,6 +31,17 @@ public class TaskActionController {
         }
     }
 
+    @PostMapping("/{taskId}/toggle-completion")
+    public ResponseEntity<TaskResponse> toggleTaskCompletion(@PathVariable String taskId, Authentication authentication) {
+        try {
+            String userId = authentication.getName();
+            Task task = taskService.toggleTaskCompletion(taskId, userId);
+            return ResponseEntity.ok(new TaskResponse(task));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PutMapping("/reorder")
     public ResponseEntity<Void> reorderTasks(@RequestBody List<String> taskIds, Authentication authentication) {
         String userId = authentication.getName();
