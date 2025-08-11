@@ -1,5 +1,4 @@
 package com.todoapp.service;
-
 import com.todoapp.model.Task;
 import org.springframework.stereotype.Service;
 
