@@ -1,0 +1,23 @@
+spring.application.name=backend
+spring.data.mongodb.uri=${MONGODB_URI:mongodb://admin:password@localhost:27017/taskloop?authSource=admin}
+
+jwt.secret=${JWT_SECRET:change-me-in-env}
+jwt.expiration=${JWT_EXPIRATION:86400000}
+
+app.name=TaskLoop Backend
+app.security.enable-cors=true
+app.security.allowed-origins=${ALLOWED_ORIGINS:*}
+app.database.uri=${APP_DATABASE_URI:mongodb://admin:password@localhost:27017/taskloop?authSource=admin}
+app.database.database-name=taskloop
+
+springdoc.api-docs.path=/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.operationsSorter=method
+springdoc.swagger-ui.tagsSorter=alpha
+
+logging.level.com.todoapp=INFO
+logging.level.org.springframework.security=WARN
+logging.level.org.springframework.web=INFO
+logging.level.org.mongodb.driver=WARN
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+
